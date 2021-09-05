@@ -1,0 +1,36 @@
+{% load static %}
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>View List</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{% static 'myapp/styles.css' %}">
+    </head>
+    <body>
+
+        <div class="container mt-5">
+          <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{message.tags}}{% endif %} alert-dismissible fade show"
+        role="alert">
+        {{message}}
+    </div>
+          <form method="post" action="" enctype="multipart/form-data">
+            {% csrf_token %}
+          
+            <div class="mb-3 text-left">
+                <label for="username" class="form-label">Enter username</label>
+                <input type="text" class="form-control" name="username" id="username" placeholder="Enter username"/>
+                
+            </div>
+            <div class="mb-3 text-left">
+                <label for="password" class="form-label">Enter password</label>
+                <input type="password" class="form-control" name="password" id="password" placeholder="Enter password"/>
+                
+            </div>
+            
+            <button class="btn btn-primary" type="submit">
+                Login
+            </button>
+          </form>
+        </div>
+    </body>
+</html>
