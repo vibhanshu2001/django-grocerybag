@@ -25,7 +25,7 @@ def add(request):
         grocery_upload.itemquantity = request.POST['itemquantity']
         grocery_upload.status = request.POST['status']
         grocery_upload.date = request.POST['date']
-        grocery_upload.date = request.user.username
+        grocery_upload.uploadedby = request.user.username
         grocery_upload.save()
         return redirect('main')
     return render(request, 'myapp/add.html')
@@ -70,4 +70,4 @@ def handleLogin(request):
 def handleLogout(request):
     logout(request)
     messages.info(request,'Successfully logged out')
-    return redirect('handleLogin')
+    return redirect('index')
