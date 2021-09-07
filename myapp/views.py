@@ -10,6 +10,7 @@ from django.contrib.auth.models import User
 from .forms import GroceryForm
 from django.views.generic import View
 from django.utils.decorators import method_decorator
+from django.contrib.auth.forms import UserCreationForm
 # Create your views here.
 @login_required(login_url='handleLogin')
 def main(request):
@@ -17,6 +18,8 @@ def main(request):
     return render(request, 'myapp/main.html',{'data':data})
 def index(request):
     return render(request, 'myapp/index.html')
+def about(request):
+    return render(request, 'myapp/about.html')
 @login_required(login_url='handleLogin')
 def add(request):
     if request.method == 'POST':
@@ -71,3 +74,24 @@ def handleLogout(request):
     logout(request)
     messages.info(request,'Successfully logged out')
     return redirect('index')
+
+def filterres(request):
+    
+    if request.method == 'POST':
+        data = GroceryUpload.objects.all()
+        filterdate = request.POST.get('filterdate')
+        return render(request, 'myapp/filter.html',{'filterdate':filterdate,'data':data})
+    return redirect('main')
+def signUp(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            return redirect('index')
+    else:
+        form = UserCreationForm()
+    return render(request, 'myapp/signup.html', {'form': form})

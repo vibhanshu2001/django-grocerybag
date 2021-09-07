@@ -1,0 +1,27 @@
+{% load static %}
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Register User</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'myapp/styles.css' %}">
+</head>
+
+<body>
+    <div class="container py-3">
+        <div class="card py-3 my-3">
+            <div class="card-body text-center">
+                <h2 style="color: red;">Register User</h2>
+                Already registered?<a href="/login"> Login here</a>
+            </div>
+        </div>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="btn btn-primary" type="submit">Sign up</button>
+        </form>
+    </div>
+</body>
+
+</html>

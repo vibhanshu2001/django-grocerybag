@@ -3,7 +3,7 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Welcome {{request.user.username}}</title>
+    <title>Filter Items</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="{% static 'myapp/styles.css' %}">
 </head>
@@ -15,6 +15,7 @@
         <a href="/logout">Logout</a>
         <a href="/" style="color: green;" class="ml-3">Home</a>
         <a href="/add" style="color: red;" class="ml-3">Add Items</a>
+        <a href="/main" style="color: red;" class="ml-3">View All Items</a>
         <div class="row">
 
             <div class="col-lg-6">
@@ -23,11 +24,11 @@
             </div>
             <div class="col-lg-6 float-right">
                 <div class="row">
-                        <form action="{% url 'filter' %}" method="POST">
-                            {%csrf_token%}
-                            <input type="date" class="form-control" name="filterdate">
-                            <input type="submit" class="btn btn-danger mt-2" value="Filter">
-                        </form>
+                    <form action="{% url 'filter' %}" method="POST">
+                        {%csrf_token%}
+                        <input type="date" class="form-control" name="filterdate">
+                        <input type="submit" class="btn btn-danger mt-2" value="Filter">
+                    </form>
                 </div>
             </div>
         </div>
@@ -35,14 +36,17 @@
         <p>Logged in as <b>{{request.user.username}}</b></p>
         <!-- // top -->
         <!-- Grocery Cards -->
-        <div class="row mt-4">
-            <!--- -->
-            <!-- Loop This -->
 
-            {% for i in data %}
-            {% if i.uploadedby == user.username %}
+        <!--- -->
+        <!-- Loop This -->
+
+        {% for i in data %}
+        {% if i.uploadedby == user.username and i.date|date:"Y-m-d" == filterdate %}
+        
+        <p style="color: blue">Showing results for {{i.date|date:"Y-m-d"}}</p><br>
+        <div class="row ">
             <div class="col-lg-4">
-                <div class="card my-3">
+                <div class="card mb-3">
                     <div class="card-body">
                         <h5 class="card-title">{{i.itemname}}</h5>
                         <h6 class="card-subtitle mb-2 text-muted">{{i.itemquantity}} Pcs.</h6>
@@ -59,13 +63,13 @@
 
                 </div>
             </div>
-            {% endif %}
-
-            {% endfor %}
-
-
-
         </div>
+        
+        
+        
+        {% endif %}
+        {% endfor %}
+        
     </div>
 </body>
 

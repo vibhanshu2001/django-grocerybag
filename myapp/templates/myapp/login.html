@@ -2,13 +2,19 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>View List</title>
+        <title>Login</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="{% static 'myapp/styles.css' %}">
     </head>
     <body>
 
         <div class="container mt-5">
+        <div class="card py-3 my-3">
+            <div class="card-body text-center">
+                <h2 style="color: red;">Login</h2>
+                Not registered?<a href="/signup"> Register here</a>
+            </div>
+        </div>
           <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{message.tags}}{% endif %} alert-dismissible fade show"
         role="alert">
         {{message}}

@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>View List</title>
+        <title>Home Page</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="{% static 'myapp/styles.css' %}">
     </head>
@@ -16,7 +16,17 @@
             </div>
             
         </div> -->
-        <div class="container d-flex h-100 justify-content-center">
+        <div class="container">
+            <div class="card py-3 my-3">
+                <div class="card-body text-center">
+                    <h2 style="color: red;">Grocery Bag Web App</h2>
+                    
+                    
+                    
+                </div>
+            </div>
+        </div>
+        <div class="container d-flex  justify-content-center">
             <div class="row justify-content-center text-center align-self-center">
                 {% if user.is_authenticated %}
                 <div class="card">
@@ -32,6 +42,7 @@
                 
                 {% else %}
                 <a class="btn btn-primary" href="/login">Login</a>
+                <a class="btn btn-outline-danger ml-3" href="/signup">Register User</a>
                 {% endif %}
                 
             </div>
